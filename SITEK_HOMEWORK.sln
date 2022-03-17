@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SITEK_HOMEWORK", "SITEK_HOMEWORK.csproj", "{C2EB5D3A-0326-4A70-A44F-1716C39A2609}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2EB5D3A-0326-4A70-A44F-1716C39A2609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2EB5D3A-0326-4A70-A44F-1716C39A2609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2EB5D3A-0326-4A70-A44F-1716C39A2609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2EB5D3A-0326-4A70-A44F-1716C39A2609}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A45DF19-69E6-432D-B45A-7EF9A54475B0}
+	EndGlobalSection
+EndGlobal
