@@ -1,4 +1,4 @@
-﻿
+﻿using System.Diagnostics;
 
 List<Document> st_rkk = new List<Document>();
 List<Document> st_obr = new List<Document>();
@@ -8,9 +8,12 @@ string path1 = @"C:\Users\LEBEDEV\Desktop\СИТЕК\Тестовое задан
 string pathSplitter = "\\", docSplitter = "\t", otvSplitter = ";";
 
 string namePath1 = path1.Split(pathSplitter)[^1];
+
 // асинхронное чтение
 using (StreamReader reader = new StreamReader(path1))
 {
+    Stopwatch Watch = new Stopwatch();
+    Watch.Start();
     string? line1;
     int i = 0;
     while ((line1 = await reader.ReadLineAsync()) != null)
@@ -21,13 +24,21 @@ using (StreamReader reader = new StreamReader(path1))
         st_rkk[i].SetGuid();
         i++;
     }
+    Watch.Stop();
+    Console.WriteLine("RunTime File1:" + Watch.Elapsed);
 }
+
+
 
 string path2 = @"C:\Users\LEBEDEV\Desktop\СИТЕК\Тестовое задание - Обращения.txt";
 string namePath2 = path2.Split(pathSplitter)[^1];
+
+
 // асинхронное чтение
 using (StreamReader reader = new StreamReader(path2))
 {
+    Stopwatch Watch = new Stopwatch();
+    Watch.Start();
     string? line2;
     int i = 0;
     while ((line2 = await reader.ReadLineAsync()) != null)
@@ -38,7 +49,10 @@ using (StreamReader reader = new StreamReader(path2))
         st_obr[i].SetGuid();
         i++;
     }
+    Watch.Stop();
+    Console.WriteLine("RunTime File2:" + Watch.Elapsed);
 }
+
 
 for (int i = 0; i < st_rkk.Count; i++)
     Console.WriteLine(st_rkk[i].GetRuk() + "\t\t" + st_rkk[i].GetOtv());
@@ -48,9 +62,6 @@ for (int i = 0; i < st_obr.Count; i++)
 
 
 
-
-
-Console.WriteLine(st_obr);
 
 
 
