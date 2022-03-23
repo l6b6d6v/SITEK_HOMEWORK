@@ -17,8 +17,8 @@ namespace SITEK_HOMEWORK
         private string? ruk;
         public string GetRuk()
         {
-            if (ruk == null)
-                ruk = "";
+            if (ruk is null)
+                ruk = "NULL";
 
             return ruk;
         }
@@ -28,8 +28,8 @@ namespace SITEK_HOMEWORK
         private string? otv;
         public string GetOtv()
         {
-            if (otv == null)
-                otv = "";
+            if (otv is null)
+                otv = "NULL";
 
             return otv;
         }

@@ -6,24 +6,8 @@ using System.Threading.Tasks;
 
 namespace SITEK_HOMEWORK
 {
-    internal class Otchet : IComparable<Otchet>
-    {
-
-        public int CompareTo(Otchet other)
-        {
-            int compare;
-            compare = String.Compare(this.ispolnitel, other.ispolnitel, true);
-
-            if (compare == 0)
-            {
-                compare = this.countRKK_OBR.CompareTo(other.countRKK_OBR);
-
-                // Use descending order for speed.
-                compare = -compare;
-            }
-            return compare;
-        }
-
+    internal class OtchetRecord
+    { 
         private Guid id;
         public Guid GetGuid()
         { return id; }
@@ -32,14 +16,14 @@ namespace SITEK_HOMEWORK
 
 
         private string? ispolnitel;
-        public string GetIspolnitel()
+
+        public string? GetIspolnitel()
         {
-            if (ispolnitel == null)
-                ispolnitel = "Данные по исп не заполнены";
             return ispolnitel;
         }
         public void SetIspolnitel(string value)
-        { ispolnitel = value; }
+        { 
+            ispolnitel = value; }
 
         private int countRKK;
         public int GetCountRKK()
