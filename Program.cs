@@ -5,8 +5,8 @@ using System.Diagnostics;
 
 string pathSplitter = "\\";
 
-//Вставьте свой путь
-string pathRKK = @"..\Тестовое задание - РКК.txt";
+//Вставьте свой путь файла с РКК
+string pathRKK = @"C:\Users\lebedev\Source\Repos\SITEK_HOMEWORK\Тестовое задание - РКК.txt";
 string namePathRKK = pathRKK.Split(pathSplitter)[^1];
 
 //Считываем файл и замеряем время считывания
@@ -15,9 +15,13 @@ WatchRKK.Start();
 List<Document> DocumentsRKK = ListOfDocumentsFromFile(pathRKK);
 WatchRKK.Stop();
 
-//Вставьте свой путь
-string pathOBR = @"..\Тестовое задание - Обращения.txt";
+//Вставьте свой путь файла с обращениями
+string pathOBR = @"C:\Users\lebedev\Source\Repos\SITEK_HOMEWORK\Тестовое задание - Обращения.txt";
 string namePathOBR = pathOBR.Split(pathSplitter)[^1];
+
+
+//Вставьте свой путь для вывода готового отчета
+string pathOtchet = @"C:\Users\lebedev\Source\Repos\SITEK_HOMEWORK\Готовый отчет.txt";
 
 Stopwatch WatchOBR = new Stopwatch();
 WatchOBR.Start();
@@ -28,10 +32,10 @@ WatchOBR.Stop();
 List<OtchetRecord> FromRKK = FillTmpOtchet(DocumentsRKK);
 
 List<OtchetRecord> OtchetForAddedElements = new List<OtchetRecord>();
-int result = FillOtchet(OtchetForAddedElements, FromRKK);
+FillOtchet(OtchetForAddedElements, FromRKK, 0); //0 - файл РКК
 
 List<OtchetRecord> FromOBR = FillTmpOtchet(DocumentsOBR);
-FillOtchet(OtchetForAddedElements, FromOBR);
+FillOtchet(OtchetForAddedElements, FromOBR, 1); //1 - файл Обращений
 
 for (int i = 0; i < OtchetForAddedElements.Count; i++)
     Console.WriteLine($"{i,-10}{OtchetForAddedElements[i].GetIspolnitel(),-25}{OtchetForAddedElements[i].GetCountRKK(),-25}" +
@@ -50,8 +54,6 @@ Console.Write(@"Выберите подходящий тип сортировк�
 Console.WriteLine();
 
 string measurement = Console.ReadLine();
-//Вставьте свой путь
-string pathOtchet = @"..\Готовый отчет.txt";
 string header = @$"
 {"",-10}{"Ответственный",-25}{"Количество",-25}{"Количество",-25}{"Общее количество",-25}
 {"№ п.п.",-10}{"исполнитель",-25}{"неисполненных",-25}{"неисполненных",-25}{"документов и",-25}
@@ -60,10 +62,10 @@ string header = @$"
 ";
 using (StreamWriter writer = new StreamWriter(pathOtchet, false))
 {
-            static void PrintOtchet(List<OtchetRecord> Otchet)
+            void PrintOtchet(List<OtchetRecord> Otchet)
         {
             for (int i = 0; i < Otchet.Count; i++)
-                writer.WriteLine($"{i,-10}{Otchet[i].GetIspolnitel(),-25}{Otchet[i].GetCountRKK(),-25}" +
+                writer.WriteLine($"{i + 1,-10}{Otchet[i].GetIspolnitel(),-25}{Otchet[i].GetCountRKK(),-25}" +
                     $"{Otchet[i].GetCountOBR(),-25}{Otchet[i].GetCountRKK_OBR(),-25}");
         }
     switch (measurement)

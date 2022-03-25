@@ -57,7 +57,7 @@ namespace SITEK_HOMEWORK
             return TmpOtchet;
         }
 
-        internal static int FillOtchet(List<OtchetRecord> Otchet, List<OtchetRecord> tmpOtchet)
+        internal static void FillOtchet(List<OtchetRecord> Otchet, List<OtchetRecord> tmpOtchet, int t)
         {
             int i = 0;
             //Заполняем первую строку в OtchetForAddedElements
@@ -67,7 +67,10 @@ namespace SITEK_HOMEWORK
                 {
                     Otchet.Add(new OtchetRecord());
                     Otchet[0].SetIspolnitel(tmpOtchet[i].GetIspolnitel());
-                    Otchet[0].SetCountRKK();
+                    if (t == 0)
+                        Otchet[0].SetCountRKK();
+                    if (t == 1)
+                        Otchet[0].SetCountOBR();
                     Otchet[0].SetCountRKK_OBR();
                     i++;
                 }
@@ -89,19 +92,23 @@ namespace SITEK_HOMEWORK
 
                     Otchet.Add(new OtchetRecord());
                     Otchet[^1].SetIspolnitel(tmpOtchet[i].GetIspolnitel());
-                    Otchet[^1].SetCountOBR();
+                    if (t == 0)
+                        Otchet[^1].SetCountRKK();
+                    if (t == 1)
+                        Otchet[^1].SetCountOBR();
                     Otchet[^1].SetCountRKK_OBR();
                 }
 
                 if (index != -1)
                 {
-                    Otchet[index].SetCountOBR();
+                    if (t == 0)
+                        Otchet[index].SetCountRKK();
+                    if (t == 1)
+                        Otchet[index].SetCountOBR();
                     Otchet[index].SetCountRKK_OBR();
                 }
                 i++;
             }
-
-            return i;
         }
     }
 }
