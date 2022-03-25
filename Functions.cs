@@ -57,7 +57,7 @@ namespace SITEK_HOMEWORK
             return TmpOtchet;
         }
 
-        internal static void FillOtchet(List<OtchetRecord> Otchet, List<OtchetRecord> tmpOtchet)
+        internal static int FillOtchet(List<OtchetRecord> Otchet, List<OtchetRecord> tmpOtchet)
         {
             int i = 0;
             //Заполняем первую строку в OtchetForAddedElements
@@ -100,6 +100,8 @@ namespace SITEK_HOMEWORK
                 }
                 i++;
             }
+
+            return i;
         }
     }
 }

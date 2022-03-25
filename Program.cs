@@ -4,7 +4,9 @@ using System.Diagnostics;
 
 
 string pathSplitter = "\\";
-string pathRKK = @"C:\Users\LEBEDEV\Desktop\СИТЕК\Тестовое задание - РКК.txt";
+
+//Вставьте свой путь
+string pathRKK = @"..\Тестовое задание - РКК.txt";
 string namePathRKK = pathRKK.Split(pathSplitter)[^1];
 
 //Считываем файл и замеряем время считывания
@@ -13,7 +15,8 @@ WatchRKK.Start();
 List<Document> DocumentsRKK = ListOfDocumentsFromFile(pathRKK);
 WatchRKK.Stop();
 
-string pathOBR = @"C:\Users\LEBEDEV\Desktop\СИТЕК\Тестовое задание - Обращения.txt";
+//Вставьте свой путь
+string pathOBR = @"..\Тестовое задание - Обращения.txt";
 string namePathOBR = pathOBR.Split(pathSplitter)[^1];
 
 Stopwatch WatchOBR = new Stopwatch();
@@ -25,7 +28,7 @@ WatchOBR.Stop();
 List<OtchetRecord> FromRKK = FillTmpOtchet(DocumentsRKK);
 
 List<OtchetRecord> OtchetForAddedElements = new List<OtchetRecord>();
-FillOtchet(OtchetForAddedElements, FromRKK);
+int result = FillOtchet(OtchetForAddedElements, FromRKK);
 
 List<OtchetRecord> FromOBR = FillTmpOtchet(DocumentsOBR);
 FillOtchet(OtchetForAddedElements, FromOBR);
@@ -47,7 +50,8 @@ Console.Write(@"Выберите подходящий тип сортировк�
 Console.WriteLine();
 
 string measurement = Console.ReadLine();
-string pathOtchet = @"C:\Users\LEBEDEV\Desktop\СИТЕК\Готовый отчет.txt";
+//Вставьте свой путь
+string pathOtchet = @"..\Готовый отчет.txt";
 string header = @$"
 {"",-10}{"Ответственный",-25}{"Количество",-25}{"Количество",-25}{"Общее количество",-25}
 {"№ п.п.",-10}{"исполнитель",-25}{"неисполненных",-25}{"неисполненных",-25}{"документов и",-25}
@@ -56,6 +60,12 @@ string header = @$"
 ";
 using (StreamWriter writer = new StreamWriter(pathOtchet, false))
 {
+            static void PrintOtchet(List<OtchetRecord> Otchet)
+        {
+            for (int i = 0; i < Otchet.Count; i++)
+                writer.WriteLine($"{i,-10}{Otchet[i].GetIspolnitel(),-25}{Otchet[i].GetCountRKK(),-25}" +
+                    $"{Otchet[i].GetCountOBR(),-25}{Otchet[i].GetCountRKK_OBR(),-25}");
+        }
     switch (measurement)
     {
         case "1":
@@ -63,9 +73,7 @@ using (StreamWriter writer = new StreamWriter(pathOtchet, false))
             OtchetForAddedElements.Sort((OtchetRecord x, OtchetRecord y) => { return x.GetIspolnitel().CompareTo(y.GetIspolnitel()); });
             writer.WriteLine("Сортировка по фамилии ответственного исполнителя");
             writer.WriteLine(header);
-            for (int i = 0; i < OtchetForAddedElements.Count; i++)
-                writer.WriteLine($"{i,-10}{OtchetForAddedElements[i].GetIspolnitel(),-25}{OtchetForAddedElements[i].GetCountRKK(), -25}" +
-                    $"{OtchetForAddedElements[i].GetCountOBR(),-25}{OtchetForAddedElements[i].GetCountRKK_OBR(),-25}");
+            PrintOtchet(OtchetForAddedElements);
             break;
         case "2":
             //Сортировка по количеству РКК (в случае равенства – по количеству обращений);
@@ -73,9 +81,7 @@ using (StreamWriter writer = new StreamWriter(pathOtchet, false))
             writer.WriteLine("Сортировка по количеству РКК");
             writer.WriteLine();
             writer.WriteLine(header);
-            for (int i = 0; i < OtchetForAddedElements.Count; i++)
-                writer.WriteLine($"{i,-10}{OtchetForAddedElements[i].GetIspolnitel(),-25}{OtchetForAddedElements[i].GetCountRKK(),-25}" +
-                    $"{OtchetForAddedElements[i].GetCountOBR(),-25}{OtchetForAddedElements[i].GetCountRKK_OBR(),-25}");
+            PrintOtchet(OtchetForAddedElements);
             break;
         case "3":
             //Сортировка по количеству обращений (в случае равенства – по количеству РКК);
@@ -83,9 +89,7 @@ using (StreamWriter writer = new StreamWriter(pathOtchet, false))
             writer.WriteLine("Сортировка по количеству обращений");
             writer.WriteLine();
             writer.WriteLine(header);
-            for (int i = 0; i < OtchetForAddedElements.Count; i++)
-                writer.WriteLine($"{i,-10}{OtchetForAddedElements[i].GetIspolnitel(),-25}{OtchetForAddedElements[i].GetCountRKK(),-25}" +
-                    $"{OtchetForAddedElements[i].GetCountOBR(),-25}{OtchetForAddedElements[i].GetCountRKK_OBR(),-25}");
+            PrintOtchet(OtchetForAddedElements);
             break;
         case "4":
             //Сортировка по общему количеству документов (в случае равенства – по количеству РКК)
@@ -94,9 +98,7 @@ using (StreamWriter writer = new StreamWriter(pathOtchet, false))
             writer.WriteLine("Сортировка по количеству РКК");
             writer.WriteLine();
             writer.WriteLine(header);
-            for (int i = 0; i < OtchetForAddedElements.Count; i++)
-                writer.WriteLine($"{i,-10}{OtchetForAddedElements[i].GetIspolnitel(),-25}{OtchetForAddedElements[i].GetCountRKK(),-25}" +
-                    $"{OtchetForAddedElements[i].GetCountOBR(),-25}{OtchetForAddedElements[i].GetCountRKK_OBR(),-25}");
+            PrintOtchet(OtchetForAddedElements);
             break;
         default:
             Console.WriteLine($"Measured value is {measurement}.");
